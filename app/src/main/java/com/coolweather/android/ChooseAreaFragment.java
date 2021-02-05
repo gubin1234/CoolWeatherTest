@@ -1,6 +1,7 @@
 package com.coolweather.android;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,12 +37,12 @@ import okhttp3.Response;
 
 /**
  * @ 作者: GB
- * @ 类名: AreaFragment
+ * @ 类名: ChooseAreaFragment
  * @ 包名: com.coolweather.android
  * @ 描述:
  * @ 日期: 2021/2/4 0004 下午 04:37
  **/
-public class AreaFragment extends Fragment {
+public class ChooseAreaFragment extends Fragment {
 
 
     public static final int LEVEL_PROVINCE = 0;
@@ -113,9 +114,15 @@ public class AreaFragment extends Fragment {
                 if (currentLevel == LEVEL_PROVINCE){//当前选中的级别==省
                     selectedProvince = provinceList.get(position);
                     queryCities();//再查询市
-                }else if (currentLevel == LEVEL_CITY){
+                }else if (currentLevel == LEVEL_CITY){//当前选中的级别==市
                     selectedCity = cityList.get(position);
-                    queryCounties();
+                    queryCounties();//再查询县
+                }else if (currentLevel == LEVEL_COUNTY){
+                    String weatherId = countyList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
