@@ -1,0 +1,214 @@
+Index: app/src/main/assets/litepal.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/assets/litepal.xml	(date 1612421426419)
++++ app/src/main/assets/litepal.xml	(date 1612421426419)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8" ?>
++<litepal>
++    <dbname value="cool_weather"></dbname><!--指定数据库名-->
++    <version value="1"></version><!--数据库版本号-->
++    <list>
++        <mapping class="com.coolweather.android.db.Province"/>
++        <mapping class="com.coolweather.android.db.City"/>
++        <mapping class="com.coolweather.android.db.County"/>
++    </list>
++</litepal>
+\ No newline at end of file
+Index: app/src/main/java/com/coolweather/android/db/Province.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/coolweather/android/db/Province.java	(date 1612421024830)
++++ app/src/main/java/com/coolweather/android/db/Province.java	(date 1612421024830)
+@@ -0,0 +1,40 @@
++package com.coolweather.android.db;
++
++import org.litepal.crud.LitePalSupport;
++
++/**
++ * @ 作者: GB
++ * @ 类名: Province
++ * @ 包名: com.coolweather.android.db
++ * @ 描述:
++ * @ 日期: 2021/2/4 0004 下午 02:28
++ **/
++public class Province extends LitePalSupport {
++    private int id;
++    private String provinceName;//省的名字
++    private int provinceCode;//省代号
++
++    public int getId() {
++        return id;
++    }
++
++    public void setId(int id) {
++        this.id = id;
++    }
++
++    public String getProvinceName() {
++        return provinceName;
++    }
++
++    public void setProvinceName(String provinceName) {
++        this.provinceName = provinceName;
++    }
++
++    public int getProvinceCode() {
++        return provinceCode;
++    }
++
++    public void setProvinceCode(int provinceCode) {
++        this.provinceCode = provinceCode;
++    }
++}
+Index: app/src/main/java/com/coolweather/android/db/County.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/coolweather/android/db/County.java	(date 1612421136111)
++++ app/src/main/java/com/coolweather/android/db/County.java	(date 1612421136111)
+@@ -0,0 +1,49 @@
++package com.coolweather.android.db;
++
++import org.litepal.crud.LitePalSupport;
++
++/**
++ * @ 作者: GB
++ * @ 类名: County
++ * @ 包名: com.coolweather.android.db
++ * @ 描述:
++ * @ 日期: 2021/2/4 0004 下午 02:39
++ **/
++public class County extends LitePalSupport {
++    private int id;
++    private String countryName;//县的名字
++    private String weatherId;//对应的天气id
++    private int cityId;//当前县所属市的id值
++
++    public int getId() {
++        return id;
++    }
++
++    public void setId(int id) {
++        this.id = id;
++    }
++
++    public String getCountryName() {
++        return countryName;
++    }
++
++    public void setCountryName(String countryName) {
++        this.countryName = countryName;
++    }
++
++    public String getWeatherId() {
++        return weatherId;
++    }
++
++    public void setWeatherId(String weatherId) {
++        this.weatherId = weatherId;
++    }
++
++    public int getCityId() {
++        return cityId;
++    }
++
++    public void setCityId(int cityId) {
++        this.cityId = cityId;
++    }
++}
+Index: app/src/main/java/com/coolweather/android/db/City.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/coolweather/android/db/City.java	(date 1612421076594)
++++ app/src/main/java/com/coolweather/android/db/City.java	(date 1612421076594)
+@@ -0,0 +1,49 @@
++package com.coolweather.android.db;
++
++import org.litepal.crud.LitePalSupport;
++
++/**
++ * @ 作者: GB
++ * @ 类名: City
++ * @ 包名: com.coolweather.android.db
++ * @ 描述:
++ * @ 日期: 2021/2/4 0004 下午 02:34
++ **/
++public class City extends LitePalSupport {
++    private int id;
++    private String cityName;//市的名字
++    private String cityCode;//市代号
++    private int provinceId;//当前市所属省的id值
++
++    public int getId() {
++        return id;
++    }
++
++    public void setId(int id) {
++        this.id = id;
++    }
++
++    public String getCityName() {
++        return cityName;
++    }
++
++    public void setCityName(String cityName) {
++        this.cityName = cityName;
++    }
++
++    public String getCityCode() {
++        return cityCode;
++    }
++
++    public void setCityCode(String cityCode) {
++        this.cityCode = cityCode;
++    }
++
++    public int getProvinceId() {
++        return provinceId;
++    }
++
++    public void setProvinceId(int provinceId) {
++        this.provinceId = provinceId;
++    }
++}
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 1c038468f51a67d6edff577ab8b9f95cbb87ce94)
++++ app/src/main/AndroidManifest.xml	(date 1612421857697)
+@@ -3,6 +3,7 @@
+     package="com.coolweather.android">
+ 
+     <application
++        android:name="org.litepal.LitePalApplication"
+         android:allowBackup="true"
+         android:icon="@mipmap/ic_launcher"
+         android:label="@string/app_name"
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 1c038468f51a67d6edff577ab8b9f95cbb87ce94)
++++ app/build.gradle	(date 1612419433564)
+@@ -29,5 +29,8 @@
+     testImplementation 'junit:junit:4.12'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+-
++    implementation 'org.litepal.guolindev:core:3.2.1'
++    implementation 'com.github.bumptech.glide:glide:4.11.0'
++    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
++    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+ }
+\ No newline at end of file
