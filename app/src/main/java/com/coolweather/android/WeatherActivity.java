@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class WeatherActivity extends AppCompatActivity {
             showWeatherInfo(weather);
         }else { //无缓存时去服务器查询天气
             String weatherId = getIntent().getStringExtra("weather_id");
+            weatherLayout.setVisibility(View.INVISIBLE);
             requestWeather(weatherId);
         }
 
@@ -59,6 +61,17 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText = (TextView)findViewById(R.id.car_wash_text);
         sportText = findViewById(R.id.sport_text);
     }
+    /*
+    * 根据天气id请求城市天气信息
+    * */
+    public void requestWeather(final String weatherId){
 
+    }
 
+    /*
+    * 处理并展示Weather实体类中的数据
+    * */
+    private void showWeatherInfo(Weather weather){
+
+    }
 }
