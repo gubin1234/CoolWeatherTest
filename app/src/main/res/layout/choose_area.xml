@@ -4,6 +4,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/choose_area_frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary">
     <!--标题栏-->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,8 +31,10 @@
             android:layout_centerVertical="true"
             android:background="@drawable/ic_back"/><!--返回按钮-->
     </RelativeLayout>
+    </FrameLayout>
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

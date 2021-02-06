@@ -102,6 +102,17 @@ public class ChooseAreaFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.list_view);//获得控件实例
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);//初始化ArrayAdapter(书中P114)
         listView.setAdapter(adapter);//设为ListView适配器
+
+        //判断绑定的活动是否是天气活动(有DrawerLayout那个活动)
+        if(getContext()instanceof WeatherActivity) {
+            //获取状态栏高度
+            int statusBarHeight = 0;
+            int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId > 0)
+                statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+            view.findViewById(R.id.choose_area_frameLayout).setPadding(0, statusBarHeight, 0, 0);
+        }
+
         return view;
     }
 
@@ -117,12 +128,19 @@ public class ChooseAreaFragment extends Fragment {
                 }else if (currentLevel == LEVEL_CITY){//当前选中的级别==市
                     selectedCity = cityList.get(position);
                     queryCounties();//再查询县
-                }else if (currentLevel == LEVEL_COUNTY){
-                    String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                }else if (currentLevel == LEVEL_COUNTY){//当前选中的级别==县
+                    String weatherId = countyList.get(position).getWeatherId();//天气id
+                    if (getActivity() instanceof MainActivity) {//instanceof判断一个对象是否属于某个类
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();//销毁主活动
+                    }else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity activity = (WeatherActivity)getActivity();
+                        activity.drawerLayout.closeDrawers();//关闭滑动菜单
+                        activity.swipeRefresh.setRefreshing(true);//显示下拉刷新列表
+                        activity.requestWeather(weatherId);//请求新城市的天气信息
+                    }
                 }
             }
         });
