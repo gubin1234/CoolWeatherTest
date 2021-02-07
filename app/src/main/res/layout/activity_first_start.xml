@@ -9,6 +9,28 @@
     <ImageView
         android:id="@+id/startbg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/bg_launcher_title" />
+        android:layout_height="0dp"
+        android:layout_weight="84.4"
+        app:srcCompat="@drawable/bg_launcher_title"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15.6">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="天气广告栏"
+            android:textSize="30sp"/>
+        <Button
+            android:id="@+id/pass"
+            android:layout_width="69dp"
+            android:layout_height="33dp"
+            android:textSize="18sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:text="跳过>>"/>
+    </RelativeLayout>
 </LinearLayout>

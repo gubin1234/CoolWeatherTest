@@ -106,29 +106,29 @@ public class WeatherActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        setDrawerLeftEdgeSize(this,drawerLayout,1);//解决DrawerLayout不能全屏滑动的问题
+        //setDrawerLeftEdgeSize(this,drawerLayout,1);//解决DrawerLayout不能全屏滑动的问题
     }
 
     /**
      * 初始化Activity的控件变量
      */
     private void initActivity() {
-        weatherLayout = (ScrollView)findViewById(R.id.weather_layout);
-        titleCity = (TextView)findViewById(R.id.title_city);
-        titleUpdateTime = (TextView)findViewById(R.id.title_update_time);
-        degreeText = (TextView)findViewById(R.id.degree_text);
-        weatherInfoText = (TextView)findViewById(R.id.weather_info_text);
-        forecastLayout = (LinearLayout)findViewById(R.id.forecast_layout);
-        aqiText = (TextView)findViewById(R.id.aqi_text);
-        pm25Text = (TextView)findViewById(R.id.pm25_text);
-        comfortText = (TextView)findViewById(R.id.comfort_text);
-        carWashText = (TextView)findViewById(R.id.car_wash_text);
+        weatherLayout = findViewById(R.id.weather_layout);
+        titleCity = findViewById(R.id.title_city);
+        titleUpdateTime = findViewById(R.id.title_update_time);
+        degreeText = findViewById(R.id.degree_text);
+        weatherInfoText = findViewById(R.id.weather_info_text);
+        forecastLayout = findViewById(R.id.forecast_layout);
+        aqiText = findViewById(R.id.aqi_text);
+        pm25Text = findViewById(R.id.pm25_text);
+        comfortText = findViewById(R.id.comfort_text);
+        carWashText = findViewById(R.id.car_wash_text);
         sportText = findViewById(R.id.sport_text);
-        bingPicImg = (ImageView)findViewById(R.id.bing_pic_img);//背景图片
-        swipeRefresh = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh);
+        bingPicImg = findViewById(R.id.bing_pic_img);//背景图片
+        swipeRefresh = findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);//刷新的进度条颜色
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        navButton = (Button)findViewById(R.id.nav_button);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navButton = findViewById(R.id.nav_button);
     }
     /*
     * 根据天气id请求城市天气信息
@@ -185,10 +185,10 @@ public class WeatherActivity extends AppCompatActivity {
         forecastLayout.removeAllViews();
         for (Forecast forecast : weather.forecastList){//未来几天天气预报
             View view = LayoutInflater.from(this).inflate(R.layout.forecast_item,forecastLayout,false);
-            TextView dateText = (TextView)view.findViewById(R.id.date_text);
-            TextView infoText = (TextView)view.findViewById(R.id.info_text);
-            TextView maxText = (TextView)view.findViewById(R.id.max_text);
-            TextView minText = (TextView)view.findViewById(R.id.min_text);
+            TextView dateText = view.findViewById(R.id.date_text);
+            TextView infoText = view.findViewById(R.id.info_text);
+            TextView maxText = view.findViewById(R.id.max_text);
+            TextView minText = view.findViewById(R.id.min_text);
             dateText.setText(forecast.date);
             infoText.setText(forecast.more.info);
             maxText.setText(forecast.temperature.max);
@@ -237,7 +237,7 @@ public class WeatherActivity extends AppCompatActivity {
         });
 
     }
-    /*实现全屏滑动*/
+    /*实现全屏滑动*//*
     private void setDrawerLeftEdgeSize (Activity activity, DrawerLayout drawerLayout, float displayWidthPercentage) {
         if (activity == null || drawerLayout == null) return;
         try {
@@ -261,5 +261,5 @@ public class WeatherActivity extends AppCompatActivity {
         } catch (IllegalArgumentException e) {
         } catch (IllegalAccessException e) {
         }
-    }
+    }*/
 }
